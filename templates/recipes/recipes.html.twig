@@ -1,0 +1,111 @@
+{% set page = 'recipes' %}
+{%  include 'recipes/header.html.twig' %}
+{% block body %}
+    <div class="recipe-template">
+        <div class="container">
+            <h1>Recipes</h1>
+                <button class="open-button" onclick="openForm()">Add Recipe</button>
+                <div class="form-popup" id="myForm">
+                    <div class="form-container">
+                        <button type="button" class="cancel-button close" onclick="closeForm()">&times;</button>
+                        <div>
+                            <div class="input-div">
+                                <label for="name"><b>Name</b></label><br>
+                                <input class="standard-input" type="text" placeholder="Enter Name" id="recipeName" required>
+                            </div>
+                            <div class="input-div">
+                                <label for="type"><b>Type</b></label><br>
+                                <input class="standard-input" type="text" placeholder="Enter Type" id="recipeType" required>
+                            </div>
+                            <div class="input-div">
+                                <label for="serves"><b>Serves</b></label><br>
+                                <input class="standard-input" type="text" placeholder="How many portions?" id="recipeServes" required>
+                            </div>
+                            <div class="input-div">
+                                <label for="time"><b>Time</b></label><br>
+                                <input class="standard-input" type="text" placeholder="Enter time required" id="recipeTime" required>
+                            </div>
+                        </div>
+                        <div class="input-div ingredients-div">
+                            <label for="ingredients"><b>Ingredients</b></label><br>
+                            <div id=ingredients-input>
+                                <div class="ingredient-input">
+                                    <input type="text" class="add-ingredient" placeholder="Enter Ingredient">
+                                    <input type="text" class="add-ingredient-amount" placeholder="Enter Amount">
+                                </div>
+                            </div>
+                            <div id="add-ingredients-input">
+                            </div>
+                            <button type="button" class="" onclick="addAnotherIngredient()">+</button>
+                        </div>
+                        <div>
+                            <label for="method"><b>Method</b></label><br>
+                            <textarea type="text" placeholder="Enter Method" id="recipeMethod" required></textarea>
+                        </div>
+                        <button id="addRecipe" onclick="addRecipe()"class="btn">Add Recipe</button>
+                    </div>
+                </div>
+
+                <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Recipe</th>
+                        <th>Recipe Type</th>
+                        <th>Time </th>
+                        <th>Serves</th>
+                        <th>Ingredients Needed</th>
+                        <th>Ingredients</th>
+                        <th>Method</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for recipe in recipes %}
+                        {% set recipeData = recipe[0] %}
+                        {% set recipeIngredients = recipe[1] %}
+                        {% set requiredIngredients = recipe[2] %}
+                        {% set colour = recipe[3] %}
+                        <tr id="{{ recipeData.getId }}" >
+                            <td> {{ recipeData.getName }} </td>
+                            <td> {{ recipeData.getType }} </td>
+                            <td> {{ recipeData.getTime }} </td>
+                            <td> {{ recipeData.getServes }} </td>
+                            <td class="{{ colour }}">{{ requiredIngredients }}</td>
+                            <td>
+                                <button class="btn" onclick = "showIngredients({{ recipeData.getId }})">See ingredients</button>
+                            </td>
+                            <td>
+                                <button class="btn" onclick = "showMethod({{ recipeData.getId }})">See method</button>
+                            </td>
+                            <td>
+                                <button type="button" onclick="deleteRecipe({{ recipeData.getId }})" class="btn close crossicon"><span aria-hidden="true">&times;</span></button>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+              </table>
+              <!-- The Modal -->
+              <div id="myModal" class="modal">
+
+                <!-- Modal content -->
+                <div class="modal-content">
+                </div>
+
+              </div>
+          </div>
+      </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="js/recipes.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script> -->
+    <!-- <script src="../../dist/js/bootstrap.min.js"></script> -->
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+{% endblock %}

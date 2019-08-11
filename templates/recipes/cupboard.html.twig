@@ -1,0 +1,26 @@
+{% set page = 'cupboard' %}
+{%  include 'recipes/header.html.twig' %}
+{% block body %}
+<div class="container">
+    <div class="cupboard-template">
+        <h1>My Cupboard</h1>
+        <div class="container">
+            <div class="ingredient-section-container" data-ingredient-type="1" id="fresh">
+                <h2>My Fresh Ingredients</h2>
+                {% include 'recipes/ingredientInput.html.twig' with {'ingredientType': 'fresh'} %}
+                {% include 'recipes/ingredientTable.html.twig' with {'ingredientType': 'fresh', 'items': freshitems} %}
+            </div>
+            <div class="ingredient-section-container" id="cupboard">
+                <h2>My Cupboard Ingredients</h2>
+                {% include 'recipes/ingredientInput.html.twig' with {'ingredientType': 'cupboard'} %}
+                {% include 'recipes/ingredientTable.html.twig' with {'ingredientType': 'cupboard', 'items': cupboarditems} %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="js/cupboard.js"></script>
+{% endblock %}

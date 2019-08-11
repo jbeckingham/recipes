@@ -1,0 +1,55 @@
+{% set page = 'search' %}
+{%  include 'recipes/header.html.twig' %}
+{% block body %}
+
+<div class="search-template">
+    <h1>Search Recipes Online</h1>
+    <h3> Choose ingredients below to add to the search </h3>
+    <div class="search-container">
+            <input type="text" class="recipe-search" id="ingredient-search-box" data-bind="value: searchItemsList()">
+            <button data-bind="click: searchRecipes" type="submit" class="btn" id="recipe-search-button">Search</button>
+    </div>
+    <div>
+        <p class="search-error">Please add some items to the search</p>
+    </div>
+    <div class="tables-container">
+        <div class="ingredient-section-container">
+        <h3>Fresh Ingredients</h3>
+        <table class="table table-hover">
+            <tbody>
+                {% for item in freshitems %}
+                <tr>
+                    <td class="button-cell"><button data-bind="click: $root.addItemToSearch" type="button" class="btn ingredient-button">{{ item.getName }}</button></td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        </div>
+        <div class="ingredient-section-container">
+            <h3>From the cupboard</h3>
+            <table class="table table-hover">
+                <tbody>
+                    {% for item in cupboarditems %}
+                    <tr>
+                        <td class="button-cell"><button data-bind="click: $root.addItemToSearch" type="button" class="btn ingredient-button">{{ item.getName }}</button></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+    <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script type='text/javascript' src='js/thirdparty/knockout-3.4.2.js'></script>
+    <script src="js/search.js"></script>
+
+{% endblock %}

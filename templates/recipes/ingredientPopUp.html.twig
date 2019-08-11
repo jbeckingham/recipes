@@ -1,0 +1,11 @@
+{% block body %}
+    <span onclick="hideModal()" class="close">&times;</span>
+    <h3>Ingredients</h3>
+    {% for ingred in ingredients %}
+        <p is-owned="{{ ingred.owned }}">{{ ingred.name }}: {{ ingred.amount }}</p>
+    {% endfor %}
+{% endblock %}
+
+{% block javascripts %}
+    <script src="js/ingredients.js"></script>
+{% endblock %}

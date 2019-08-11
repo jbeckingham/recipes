@@ -1,0 +1,24 @@
+<table class="table table-hover" data-ingredient-type="{{ ingredientType }}" id="table-{{ ingredientType }}">
+  <thead>
+    <tr>
+      <th>Ingredient</th>
+      <th>Amount</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for item in items %}
+    <tr id= {{ item.getId() }}>
+        <td> {{ item.getName() }} </td>
+        <td> {{ item.getAmount() }} </td>
+        <td>
+            <button type="button" onclick="deleteItem(this)" data-ingredient-type="{{ ingredientType }}" data-item-id="{{ item.getId() }}" class="btn close crossicon">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<script src="js/table.js"></script>

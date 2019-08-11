@@ -1,0 +1,235 @@
+body {
+  padding-top: 2rem;
+}
+.cupboard-template, .recipe-template, .search-template {
+  padding: 1rem 1.5rem;
+  text-align: center;
+}
+
+h1 {
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+h2 {
+    padding: 10px;
+}
+
+.table tr:hover .crossicon {
+    visibility: visible;
+}
+
+.table .crossicon{
+    visibility: hidden;
+    float: none;
+}
+
+.crossicon:hover {
+    color: red;
+}
+
+.table {
+    margin: 10px;
+    margin-top: 30px;
+}
+
+.addbutton {
+    padding: 10px;
+}
+
+.container {
+    width: 100%;
+    height: 100px;
+    margin: auto;
+    padding: 20px;
+}
+.ingredient-section-container {
+    float: left;
+    width: 50%;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+ .search-container button {
+     margin: 20;
+     background: #ddd;
+     font-size: 17px;
+     border: none;
+     cursor: pointer;
+}
+
+.search-container button:hover {
+  background: #ccc;
+}
+
+.ingredient-selected {
+    background: #6fcc73;
+    color: #ffffff;
+}
+
+.recipe-search {
+    width: 50%;
+}
+
+.button-cell {
+    align="center";
+}
+
+.tables-container {
+    display: flex;
+    justify-content: center;
+}
+
+.search-error {
+    color: red;
+    display: none;
+}
+
+.ingredient-input {
+    padding: 2px;
+    float: right;
+    margin-right: 30px;
+}
+
+.open-button {
+  background-color: #555;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  opacity: 0.8;
+  position: absolute;
+  top: 45px;
+  left: 50px;
+  width: 280px;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: absolute;
+  top: 93;
+  left: 308px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  width: 700px;
+  padding: 10px;
+  background-color: white;
+}
+
+
+.add-ingredient {
+    margin: 5px;
+    width: 30px;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password], .form-container textarea {
+  width: 300px;
+  padding: 10px;
+  border: none;
+  background: #f1f1f1;
+}
+
+.form-container textarea {
+    width: 100%
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus, , .form-container textarea:focus {
+  background-color: #ddd;
+  outline: none;
+  display: inline-block;
+}
+
+.form-container .input-div {
+    display: inline-block;
+}
+
+/* Set a style for the submit/login button */
+.form-container .btn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  width: 50%;
+  /* margin-bottom:10px; */
+  opacity: 0.8;
+}
+
+.form-container .cancel-button {
+    position: absolute;
+    right: 10px
+}
+
+.form-container .add-ingredient-amount {
+    width: 200px
+}
+
+.form-container .cancel-button:hover {
+    color: red;
+}
+
+.ingredient-popup {
+    display: block;
+}
+
+.ingredient-owned {
+    color: green;
+}
+
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 60%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  text-align: right;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+td.green {
+    color: lightgreen;
+}
+
+td.amber{
+    color: yellow;
+}
+td.red{
+    color: #F08080;
+}
