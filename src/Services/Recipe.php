@@ -4,6 +4,7 @@ namespace App\Services;
 
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\RecipeIngredient;
+use App\Entity\Recipe as RecipeEntity;
 use App\Entity\Ingredients;
 
 class Recipe
@@ -18,11 +19,11 @@ class Recipe
     public function getRecipeIngredients($recipeId)
     {
         $repository = $this->em->getRepository(RecipeIngredient::class);
-        $ingredientsDb = $repository->findBy(
+        $ingredientsFromDb = $repository->findBy(
             array('recipe_id' => $recipeId)
         );
         $ingredients = [];
-        foreach ($ingredientsDb as $ingredient) {
+        foreach ($ingredientsFromDb as $ingredient) {
             $owned = $this->ownIngredient($ingredient->getIngredient());
             $item['name'] = $ingredient->getIngredient();
             $item['amount'] = $ingredient->getAmount();
@@ -30,6 +31,12 @@ class Recipe
             $ingredients[] = $item;
         }
         return $ingredients;
+    }
+
+    public function getRecipeMethod($recipeId)
+    {
+        $repository = $this->em->getRepository(RecipeEntity::class)->find($recipeId);
+        return $repository->getMethod();
 
     }
 

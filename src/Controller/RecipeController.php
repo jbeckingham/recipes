@@ -7,13 +7,13 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use App\Entity\Recipe;
-use App\Entity\RecipeIngredient;
-use App\Entity\Ingredients;
 use App\Services\Recipe as RecipeService;
 
 
 class RecipeController Extends Controller
 {
+
+    protected $recipeService;
 
     public function __construct(RecipeService $recipeService)
     {
@@ -25,9 +25,8 @@ class RecipeController Extends Controller
     public function recipes() {
 
         $repository = $this->getDoctrine()->getRepository(Recipe::class);
-        $ingredRepository = $this->getDoctrine()->getRepository(RecipeIngredient::class);
         $recipesDb = $repository->findAll();
-
+        $recipes = [];
         foreach ($recipesDb as $item) {
             $recipeId = $item->getId();
             $ingredients = $this->recipeService->getRecipeIngredients($recipeId);
@@ -45,8 +44,9 @@ class RecipeController Extends Controller
     /**
      * @Route("/recipe/add")
      * @Method("POST")
+     * @param Request $request
      * @return Response
-    */
+     */
     public function addRecipe(Request $request)
     {
         $requestIngredients = json_decode($request->request->get('ingredients'), true);
@@ -57,11 +57,11 @@ class RecipeController Extends Controller
         $em = $this->getDoctrine()->getManager();
 
         $recipe = new Recipe();
-        $recipe->setName($request->request->get('name'););
-        $recipe->setType($request->request->get('type'););
-        $recipe->setServes($request->request->get('serves'););
-        $recipe->setTime($request->request->get('time'););
-        $recipe->setMethod($request->request->get('method'););
+        $recipe->setName($request->request->get('name'));
+        $recipe->setType($request->request->get('type'));
+        $recipe->setServes($request->request->get('serves'));
+        $recipe->setTime($request->request->get('time'));
+        $recipe->setMethod($request->request->get('method'));
 
         $em->persist($recipe);
         $em->flush();
@@ -75,8 +75,9 @@ class RecipeController Extends Controller
     /**
      * @Route("/recipe/delete")
      * @Method("POST")
+     * @param Request $request
      * @return Response
-    */
+     */
     public function deleteRecipe(Request $request)
     {
         $id = $request->request->get('id');
@@ -93,28 +94,26 @@ class RecipeController Extends Controller
     /**
      * @Route("/recipe/ingredients")
      * @Method("POST")
+     * @param Request $request
      * @return Response
-    */
+     */
     public function getRecipeIngredientsHtml(Request $request) {
         $recipeId = $request->request->get('recipeId');
-        $repository = $this->getDoctrine()->getRepository(Recipe::class);
         return $this->render('recipes/ingredientPopUp.html.twig', array(
-             'ingredients' => $this->recipeService->getRecipeIngredients($recipeId) ,
+             'ingredients' => $this->recipeService->getRecipeIngredients($recipeId),
          ));
     }
 
     /**
      * @Route("/recipe/method")
      * @Method("POST")
+     * @param Request $request
      * @return Response
-    */
+     */
     public function getRecipeMethodHtml(Request $request) {
-        $em = $this->getDoctrine()->getManager();
-        $recipe = $em->getRepository(Recipe::class)->find($recipeId);
-        $method = $recipe->getMethod();
         $recipeId = $request->request->get('recipeId');
         return $this->render('recipes/methodPopUp.html.twig', array(
-             'method' => $method,
+             'method' => $this->recipeService->getRecipeMethod($recipeId),
          ));
     }
 

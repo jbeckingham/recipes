@@ -24,11 +24,11 @@ class CupboardController Extends Controller
         $ingredients = $repository->findAll();
 
         $fresh = array_filter($ingredients, function($v){
-            return $v->getType() == 1;
+            return $v->getType() == Cupboard::INGREDIENT_FRESH_ID;
         });
 
         $cupboard = array_filter($ingredients, function($v){
-            return $v->getType() == 2;
+            return $v->getType() == Cupboard::INGREDIENT_CUPBOARD_ID;
         });
 
         return $this->render('recipes/cupboard.html.twig', array(

@@ -5,6 +5,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use App\Entity\Ingredients;
+use App\Services\Cupboard;
 
 class SearchController Extends Controller
 {
@@ -19,7 +20,7 @@ class SearchController Extends Controller
         $cupboard= [];
 
         foreach ($ingredients as $ingredient) {
-            if ($ingredient->getType() == 1) {
+            if ($ingredient->getType() == Cupboard::INGREDIENT_FRESH_ID) {
                 $fresh[] = $ingredient;
             }
             else {
